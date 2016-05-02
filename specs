@@ -1,0 +1,9 @@
+
+
+Key values to keep in mind:
+
+Age: as time passes, you pet ages.
+Hunger: when this hits 0, your pet will start loosing health
+Health: When this hits 0, your pet will die
+Joy: the happier your pet is, the more something something
+Love: the higher the value, the more your pet will love you (and stuff might happen)
