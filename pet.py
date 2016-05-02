@@ -7,6 +7,7 @@ class Pet(object):
     def __init__(self, arg):
         super(Pet, self).__init__()
         self.arg = arg
+        self.initializeValues()
 
     def initializeValues(self):
         """ set values when the pet is born"""
@@ -16,3 +17,7 @@ class Pet(object):
         self.health = 100  # how healthy is the pet
         self.joy = 50  # set the joy level
         self.love = 0  # how much does your pet love you
+        self.alive = True
+
+    def feed(self):
+        self.hunger = max(self.hunger + 50, 100)
