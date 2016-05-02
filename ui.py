@@ -13,4 +13,13 @@ class UI(object):
 
     def createMainWindow(self):
         self.window = pygame.display.set_mode((640, 480))
+        self.isAlive = True
         pass
+
+    def handleEvent(self, pet):
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.isAlive = False
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                pet.feed()

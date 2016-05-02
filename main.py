@@ -37,9 +37,10 @@ if __name__ == "__main__":
 
     while game.window.isAlive:
 
-        game.window.handleEvent()
+        game.window.handleEvent(game.pet)
         game.computeTick()
 
+        print game.pet.hunger
         time.sleep(1)
         pass
 

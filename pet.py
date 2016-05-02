@@ -20,4 +20,4 @@ class Pet(object):
         self.alive = True
 
     def feed(self):
-        self.hunger = max(self.hunger + 50, 100)
+        self.hunger = min(self.hunger + 50, 100)
