@@ -39,8 +39,10 @@ if __name__ == "__main__":
 
         game.window.handleEvent(game.pet)
         game.computeTick()
+        game.window.redraw()
 
-        print game.pet.hunger
+        print "hunger: %.1f" % (game.pet.hunger, )
+        print "health: %.1f" % (game.pet.health, )
         time.sleep(1)
         pass
 

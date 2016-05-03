@@ -12,14 +12,24 @@ class UI(object):
         pygame.init()
 
     def createMainWindow(self):
+        # create game window
         self.window = pygame.display.set_mode((640, 480))
+
+        # create background and stick it on the window
+        self.background = pygame.image.load("assets/img/background.png")
+        self.background = self.background.convert()
+
+        self.window.blit(self.background, (0, 0))
+
         self.isAlive = True
-        pass
 
     def handleEvent(self, pet):
-
+        """define action to be taken depending on user input"""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.isAlive = False
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 pet.feed()
+
+    def redraw(self):
+        pygame.display.flip()
