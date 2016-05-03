@@ -31,5 +31,15 @@ class UI(object):
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 pet.feed()
 
+    def showPet(self, pet):
+        if pet.alive is True:
+            self.petImg = pygame.image.load("assets/img/live-pet.png")
+            self.petImg = self.petImg.convert_alpha()
+            self.window.blit(self.petImg, (200, 300))
+        else:
+            self.petImg = pygame.image.load("assets/img/dead-pet.png")
+            self.petImg = self.petImg.convert_alpha()
+            self.window.blit(self.petImg, (200, 300))
+
     def redraw(self):
         pygame.display.flip()

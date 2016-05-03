@@ -14,7 +14,8 @@ class virtualPet(object):
         self.arg = arg
         self.window = ui.UI(None)
         self.window.createMainWindow()
-        self.createPet()
+        self.pet = pet.Pet(None)
+        self.window.showPet(self.pet)
 
     def computeTick(self):
         """ compute all action to be done on each game tick (1 second)"""
@@ -26,9 +27,6 @@ class virtualPet(object):
         if self.pet.health == 0:
             self.pet.alive = False
         pass
-
-    def createPet(self):
-        self.pet = pet.Pet(None)
 
 
 if __name__ == "__main__":
