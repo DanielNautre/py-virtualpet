@@ -14,6 +14,7 @@ class virtualPet(object):
         self.arg = arg
         self.window = ui.UI(None)
         self.window.createMainWindow()
+        self.window.createUserInterface()
         self.pet = pet.Pet(None)
         self.window.showPet(self.pet)
 

@@ -21,3 +21,6 @@ class Pet(object):
 
     def feed(self):
         self.hunger = min(self.hunger + 50, 100)
+
+    def heal(self):
+        self.health = min(self.health + 50, 100)
