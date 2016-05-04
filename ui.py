@@ -7,7 +7,7 @@ import pygame
 class UI(object):
     """UI Class, handles all UI related stuff"""
 
-    WINSIZE = (640, 480)
+    WINSIZE = (800, 600)
 
     def __init__(self, arg):
         super(UI, self).__init__()
@@ -25,6 +25,28 @@ class UI(object):
         self.healBtnPos = (150, 200)
         self.healBtnPath = "assets/img/healBtn.png"
 
+    def loadImages(self):
+        """Load images into memory"""
+
+        # Load the background
+        self.background = pygame.image.load("assets/img/background.png")
+        self.background = self.background.convert()
+
+        # Load Pet images
+        self.aliveImg = pygame.image.load("assets/img/live-pet.png")
+        self.aliveImg = self.aliveImg.convert_alpha()
+
+        self.deadImg = pygame.image.load("assets/img/dead-pet.png")
+        self.deadImg = self.deadImg.convert_alpha()
+
+        # Load UI elements
+        self.feedBtnImg = pygame.image.load(self.feedBtnPath)
+        self.feedBtnImg = self.feedBtnImg.convert_alpha()
+
+        self.healBtnImg = pygame.image.load(self.healBtnPath)
+        self.healBtnImg = self.healBtnImg.convert_alpha()
+
+
     def createMainWindow(self):
 
         self.initiateMainValues()
@@ -32,24 +54,10 @@ class UI(object):
         # create game window
         self.window = pygame.display.set_mode(UI.WINSIZE)
 
-        # create background and stick it on the window
-        self.background = pygame.image.load("assets/img/background.png")
-        self.background = self.background.convert()
-
-        self.window.blit(self.background, (0, 0))
+        # load images into memory
+        self.loadImages()
 
         self.isAlive = True
-
-    def createUserInterface(self):
-        # Create Feed Button
-        self.feedBtnImg = pygame.image.load(self.feedBtnPath)
-        self.feedBtnImg = self.feedBtnImg.convert_alpha()
-        self.window.blit(self.feedBtnImg, self.feedBtnPos)
-
-        # Create Heal Button
-        self.healBtnImg = pygame.image.load(self.healBtnPath)
-        self.healBtnImg = self.healBtnImg.convert_alpha()
-        self.window.blit(self.healBtnImg, self.healBtnPos)
 
     def handleEvent(self, pet):
         """define action to be taken depending on user input"""
@@ -85,16 +93,25 @@ class UI(object):
                 else:
                     continue
 
+    def drawBackground(self):
+        self.window.blit(self.background, (0, 0))
 
-    def showPet(self, pet):
+    def drawUserInterface(self):
+        self.window.blit(self.feedBtnImg, self.feedBtnPos)
+        self.window.blit(self.healBtnImg, self.healBtnPos)
+
+    def drawPet(self, pet):
         if pet.alive is True:
-            self.petImg = pygame.image.load("assets/img/live-pet.png")
-            self.petImg = self.petImg.convert_alpha()
-            self.window.blit(self.petImg, (200, 300))
+            self.window.blit(self.aliveImg, (200, 300))
         else:
-            self.petImg = pygame.image.load("assets/img/dead-pet.png")
-            self.petImg = self.petImg.convert_alpha()
-            self.window.blit(self.petImg, (200, 300))
+            self.window.blit(self.deadImg, (200, 300))
 
-    def redraw(self):
+    def redraw(self, pet):
+        self.drawBackground()
+        self.drawPet(pet)
+        self.drawUserInterface()
+
         pygame.display.flip()
+
+    def setTickSpeed(self, value):
+        pygame.time.Clock().tick(value)
