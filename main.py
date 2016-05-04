@@ -44,5 +44,5 @@ if __name__ == "__main__":
         game.computeTick()
         game.window.redraw(game.pet)
 
-        print "hunger: %.1f" % (game.pet.hunger, )
+        # print "hunger: %.1f" % (game.pet.hunger, )
         print "health: %.1f" % (game.pet.health, )

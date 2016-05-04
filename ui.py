@@ -67,6 +67,8 @@ class UI(object):
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 x, y = event.pos[0], event.pos[1]
 
+                # print "X = %d & Y= %d" % (x, y)
+
                 # Feed ?
                 btnStartX = self.feedBtnPos[0]
                 btnStopX = self.feedBtnPos[0] + self.feedBtnSize[0]
@@ -77,7 +79,6 @@ class UI(object):
                 if (btnStartX < x < btnStopX and
                         btnStartY < y < btnStopY):
                     pet.feed()
-                else:
                     continue
 
                 # Heal ?
@@ -90,7 +91,6 @@ class UI(object):
                 if (btnStartX < x < btnStopX and
                         btnStartY < y < btnStopY):
                     pet.heal()
-                else:
                     continue
 
     def drawBackground(self):
