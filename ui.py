@@ -2,57 +2,34 @@
 # -*- coding: utf8 -*
 
 import pygame
+import uisettings as uis
 
 
 class UI(object):
     """UI Class, handles all UI related stuff"""
-
-    WINSIZE = (800, 600)
 
     def __init__(self, arg):
         super(UI, self).__init__()
         self.arg = arg
         pygame.init()
 
-    def initiateMainValues(self):
-        # Feed Button
-        self.feedBtnSize = (50, 50)
-        self.feedBtnPos = (150, 150)
-        self.feedBtnPath = "assets/img/feedBtn.png"
-
-        # Heal Button
-        self.healBtnSize = (50, 50)
-        self.healBtnPos = (150, 200)
-        self.healBtnPath = "assets/img/healBtn.png"
-
     def loadImages(self):
         """Load images into memory"""
 
         # Load the background
-        self.background = pygame.image.load("assets/img/background.png")
-        self.background = self.background.convert()
+        self.background = pygame.image.load(uis.backgroundImgPath).convert()
 
         # Load Pet images
-        self.aliveImg = pygame.image.load("assets/img/live-pet.png")
-        self.aliveImg = self.aliveImg.convert_alpha()
-
-        self.deadImg = pygame.image.load("assets/img/dead-pet.png")
-        self.deadImg = self.deadImg.convert_alpha()
+        self.aliveImg = pygame.image.load(uis.aliveImgPath).convert_alpha()
+        self.deadImg = pygame.image.load(uis.deadImgPath).convert_alpha()
 
         # Load UI elements
-        self.feedBtnImg = pygame.image.load(self.feedBtnPath)
-        self.feedBtnImg = self.feedBtnImg.convert_alpha()
-
-        self.healBtnImg = pygame.image.load(self.healBtnPath)
-        self.healBtnImg = self.healBtnImg.convert_alpha()
-
+        self.feedBtnImg = pygame.image.load(uis.feedBtnPath).convert_alpha()
+        self.healBtnImg = pygame.image.load(uis.healBtnPath).convert_alpha()
 
     def createMainWindow(self):
-
-        self.initiateMainValues()
-
         # create game window
-        self.window = pygame.display.set_mode(UI.WINSIZE)
+        self.window = pygame.display.set_mode(uis.WINSIZE)
 
         # load images into memory
         self.loadImages()
@@ -70,11 +47,11 @@ class UI(object):
                 # print "X = %d & Y= %d" % (x, y)
 
                 # Feed ?
-                btnStartX = self.feedBtnPos[0]
-                btnStopX = self.feedBtnPos[0] + self.feedBtnSize[0]
+                btnStartX = uis.feedBtnPos[0]
+                btnStopX = uis.feedBtnPos[0] + uis.feedBtnSize[0]
 
-                btnStartY = self.feedBtnPos[1]
-                btnStopY = self.feedBtnPos[1] + self.feedBtnSize[1]
+                btnStartY = uis.feedBtnPos[1]
+                btnStopY = uis.feedBtnPos[1] + uis.feedBtnSize[1]
 
                 if (btnStartX < x < btnStopX and
                         btnStartY < y < btnStopY):
@@ -82,11 +59,11 @@ class UI(object):
                     continue
 
                 # Heal ?
-                btnStartX = self.healBtnPos[0]
-                btnStopX = self.healBtnPos[0] + self.healBtnSize[0]
+                btnStartX = uis.healBtnPos[0]
+                btnStopX = uis.healBtnPos[0] + uis.healBtnSize[0]
 
-                btnStartY = self.healBtnPos[1]
-                btnStopY = self.healBtnPos[1] + self.healBtnSize[1]
+                btnStartY = uis.healBtnPos[1]
+                btnStopY = uis.healBtnPos[1] + uis.healBtnSize[1]
 
                 if (btnStartX < x < btnStopX and
                         btnStartY < y < btnStopY):
@@ -97,8 +74,8 @@ class UI(object):
         self.window.blit(self.background, (0, 0))
 
     def drawUserInterface(self):
-        self.window.blit(self.feedBtnImg, self.feedBtnPos)
-        self.window.blit(self.healBtnImg, self.healBtnPos)
+        self.window.blit(self.feedBtnImg, uis.feedBtnPos)
+        self.window.blit(self.healBtnImg, uis.healBtnPos)
 
     def drawPet(self, pet):
         if pet.alive is True:

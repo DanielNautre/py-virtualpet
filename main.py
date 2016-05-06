@@ -37,7 +37,7 @@ if __name__ == "__main__":
 
     while game.window.isAlive:
 
-        game.window.setTickSpeed(1)  # 1 frames a second
+        game.window.setTickSpeed(1)  # n frames per second
 
         # Handle user input, then compute passing time, then redraw game
         game.window.handleEvent(game.pet)
