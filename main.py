@@ -30,6 +30,8 @@ class virtualPet(object):
         if self.pet.health == 0:
             self.pet.alive = False
 
+        self.pet.moodletDecrease()
+
 
 if __name__ == "__main__":
 
@@ -45,4 +47,7 @@ if __name__ == "__main__":
         game.window.redraw(game.pet)
 
         # print "hunger: %.1f" % (game.pet.hunger, )
-        print "health: %.1f" % (game.pet.health, )
+        # print "health: %.1f" % (game.pet.health, )
+        print "moodlets: "
+        print game.pet.activeMood
+        print "mood: %d " % (game.pet.getCurrentMood(), )
