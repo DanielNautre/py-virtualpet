@@ -17,7 +17,7 @@ class UI(object):
         """Load images into memory"""
 
         # Load the background
-        self.background = pygame.image.load(uis.backgroundImgPath).convert()
+        self.background = pygame.image.load(uis.backgroundDayImgPath).convert()
 
         # Load Pet images
         self.aliveImg = pygame.image.load(uis.aliveImgPath).convert_alpha()
@@ -26,6 +26,11 @@ class UI(object):
         # Load UI elements
         self.feedBtnImg = pygame.image.load(uis.feedBtnPath).convert_alpha()
         self.healBtnImg = pygame.image.load(uis.healBtnPath).convert_alpha()
+
+        # Load Moodlets images
+        self.moodletImg = {}
+        self.moodletImg["fed"] = pygame.image.load(uis.fedImgPath)
+        self.moodletImg["fed"] = self.moodletImg["fed"].convert_alpha()
 
     def createMainWindow(self):
         # create game window
@@ -77,6 +82,10 @@ class UI(object):
         self.window.blit(self.feedBtnImg, uis.feedBtnPos)
         self.window.blit(self.healBtnImg, uis.healBtnPos)
 
+    def drawMoodlets(self, pet):
+        for mood in pet.activeMood.iteritems():
+            self.window.blit(self.moodletImg[mood[0]], (768, 0))
+
     def drawPet(self, pet):
         if pet.alive is True:
             self.window.blit(self.aliveImg, (200, 300))
@@ -87,6 +96,7 @@ class UI(object):
         self.drawBackground()
         self.drawPet(pet)
         self.drawUserInterface()
+        self.drawMoodlets(pet)
 
         pygame.display.flip()
 

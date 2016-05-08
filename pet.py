@@ -41,7 +41,7 @@ class Pet(object):
                 # if moodlet has -1 duration, it never expires
                 if self.activeMood[mood[0]][i] == -1:
                     continue
-                # if moodlet has 0 time, remove it    
+                # if moodlet has 0 time, remove it
                 if self.activeMood[mood[0]][i] < 1:
                     del self.activeMood[mood[0]][i]
 
@@ -57,11 +57,11 @@ class Pet(object):
 
     def getCurrentMood(self):
         moodValue = 0
-        
+
         for mood in self.activeMood.iteritems():
             if m.moodlets[mood[0]]["stackable"]:
                 stacksize = m.moodlets[mood[0]]["stackable"]
-                toadd = len(mood[1]) *  m.moodlets[mood[0]]["value"]
+                toadd = len(mood[1]) * m.moodlets[mood[0]]["value"]
                 moodValue = moodValue + min(toadd, stacksize)
             else:
                 moodValue = moodValue + m.moodlets[mood[0]]["value"]
