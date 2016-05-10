@@ -11,13 +11,13 @@ class virtualPet(object):
         super(virtualPet, self).__init__()
         self.arg = arg
 
+        # create the pet and draw it
+        self.pet = pet.Pet(None)
+
         # Create the window and the UI
         self.window = ui.UI(None)
         self.window.createMainWindow()
-        self.window.drawUserInterface()
-
-        # create the pet and draw it
-        self.pet = pet.Pet(None)
+        self.window.drawUserInterface(self.pet)
         self.window.drawPet(self.pet)
 
     def computeTick(self):

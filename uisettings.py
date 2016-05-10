@@ -7,6 +7,13 @@ WINSIZE = (800, 600)
 backgroundDayImgPath = "assets/img/background-day.png"
 backgroundNightImgPath = "assets/img/background-night.png"
 
+# joy gauge
+gaugeEmptyPos = (200, 0)
+gaugeEmptyImgPath = "assets/img/gauge-empty.png"
+
+gaugeFullPos = (200, 0)
+gaugeFullImgPath = "assets/img/gauge-full.png"
+
 
 # Feed Button
 feedBtnSize = (50, 50)
@@ -24,4 +31,5 @@ deadImgPath = "assets/img/dead-pet.png"
 
 # MOODLETS
 moodletSize = (32, 32)
+moodletSpacer = (15, 15)
 fedImgPath = "assets/moodlets/fed.png"

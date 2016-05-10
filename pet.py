@@ -56,7 +56,7 @@ class Pet(object):
             del self.activeMood[marked]
 
     def getCurrentMood(self):
-        moodValue = 0
+        moodValue = 50
 
         for mood in self.activeMood.iteritems():
             if m.moodlets[mood[0]]["stackable"]:
