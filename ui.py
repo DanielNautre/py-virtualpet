@@ -28,6 +28,7 @@ class UI(object):
         # Load UI elements
         self.feedBtnImg = pygame.image.load(uis.feedBtnPath).convert_alpha()
         self.healBtnImg = pygame.image.load(uis.healBtnPath).convert_alpha()
+        self.idCardImg = pygame.image.load(uis.idCardPath).convert_alpha()
 
         # Load Moodlets images
         self.moodletImg = {}
@@ -83,15 +84,20 @@ class UI(object):
     def drawUserInterface(self, pet):
         self.window.blit(self.feedBtnImg, uis.feedBtnPos)
         self.window.blit(self.healBtnImg, uis.healBtnPos)
+        self.window.blit(self.idCardImg, uis.idCardPos)
+
         self.window.blit(self.gaugeEmptyImg, uis.gaugeEmptyPos)
         crop = (0, 0, pet.getCurrentMood() * 2, 50)
         self.window.blit(self.gaugeFullImg, uis.gaugeFullPos, crop)
 
-    def drawMoodlets(self, pet):
 
+
+    def drawMoodlets(self, pet):
         i = 0
         for mood in pet.activeMood.iteritems():
-            self.window.blit(self.moodletImg[mood[0]], (768, 15 + (i * 47)))
+            posX = uis.WINSIZE[0] - (uis.moodletSpacer[0] + uis.moodletSize[0])
+            posY = uis.moodletSpacer[1] + (i * (uis.moodletSpacer[0] + uis.moodletSize[0]))
+            self.window.blit(self.moodletImg[mood[0]], (posX, posY))
             i = i + 1
 
     def drawPet(self, pet):

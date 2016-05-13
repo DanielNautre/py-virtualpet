@@ -15,6 +15,13 @@ gaugeFullPos = (200, 0)
 gaugeFullImgPath = "assets/img/gauge-full.png"
 
 
+# ID Card
+
+idCardPos = (15, 485)
+idCardSize = (150, 100)
+idCardPath = "assets/img/id-card.png"
+
+
 # Feed Button
 feedBtnSize = (50, 50)
 feedBtnPos = (750, 550)
