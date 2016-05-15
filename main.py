@@ -22,15 +22,23 @@ class virtualPet(object):
 
     def computeTick(self):
         """ compute all action to be done on each game tick (1 second)"""
+
+        self.pet.moodletDecrease()
+
         if self.pet.hunger == 0 and self.pet.health > 0:
             self.pet.health = self.pet.health - 1
         if self.pet.hunger > 0:
             self.pet.hunger = self.pet.hunger - 0.1
 
+        if self.pet.blader > 80:
+            self.pet.dirt = self.pet.dirt + 50
+            self.pet.blader = 0
+
+        if self.pet.dirt > 80:
+            self.pet.addMood("dirty")
+
         if self.pet.health == 0:
             self.pet.alive = False
-
-        self.pet.moodletDecrease()
 
 
 if __name__ == "__main__":
@@ -46,8 +54,11 @@ if __name__ == "__main__":
         game.computeTick()
         game.window.redraw(game.pet)
 
+        print "------------------------------------------"
         # print "hunger: %.1f" % (game.pet.hunger, )
         # print "health: %.1f" % (game.pet.health, )
+        print "blader: %.1f " % (game.pet.blader, )
+        print "dirt: %.1f " % (game.pet.dirt, )
+        # print "mood: %d " % (game.pet.getCurrentMood(), )
         print "moodlets: "
         print game.pet.activeMood
-        print "mood: %d " % (game.pet.getCurrentMood(), )

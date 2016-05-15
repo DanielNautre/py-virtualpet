@@ -7,6 +7,10 @@ import moodlets as m
 
 class Pet(object):
     """docstring for Pet"""
+
+    MAXHUNGER = 100
+    MAXBLADER = 100
+
     def __init__(self, arg):
         super(Pet, self).__init__()
         self.arg = arg
@@ -19,15 +23,22 @@ class Pet(object):
         self.hunger = 0  # how hungry is the pet
         self.health = 5  # how healthy is the pet
         self.love = 0  # how much does your pet love you
+        self.blader = 0  # does you'r pet have a pressing need ?
+        self.dirt = 0  # how dirty your pet is
         self.alive = True
         self.activeMood = defaultdict(list)
 
     def feed(self):
-        self.hunger = min(self.hunger + 50, 100)
+        self.hunger = min(self.hunger + 50, Pet.MAXHUNGER)
+        self.blader = min(self.blader + 25, Pet.MAXBLADER)
         self.activeMood["fed"].append(m.moodlets["fed"]["duration"])
 
     def heal(self):
         self.health = min(self.health + 50, 100)
+
+    def clean(self):
+        self.dirt = 0
+        del self.activeMood["dirty"]
 
     def moodletDecrease(self):
         markedfordeletion = []
@@ -67,3 +78,6 @@ class Pet(object):
                 moodValue = moodValue + m.moodlets[mood[0]]["value"]
 
         return moodValue
+
+    def addMood(self, mood):
+        self.activeMood[mood].append(m.moodlets[mood]["duration"])

@@ -3,6 +3,7 @@
 
 import pygame
 import uisettings as uis
+import strings as s
 
 
 class UI(object):
@@ -35,8 +36,12 @@ class UI(object):
         self.moodletImg["fed"] = pygame.image.load(uis.fedImgPath)
         self.moodletImg["fed"] = self.moodletImg["fed"].convert_alpha()
 
+        self.moodletImg["dirty"] = pygame.image.load(uis.fedImgPath)
+        self.moodletImg["dirty"] = self.moodletImg["fed"].convert_alpha()
+
     def createMainWindow(self):
         # create game window
+        pygame.display.set_caption(s.windowLbl)
         self.window = pygame.display.set_mode(uis.WINSIZE)
 
         # load images into memory
@@ -89,7 +94,6 @@ class UI(object):
         self.window.blit(self.gaugeEmptyImg, uis.gaugeEmptyPos)
         crop = (0, 0, pet.getCurrentMood() * 2, 50)
         self.window.blit(self.gaugeFullImg, uis.gaugeFullPos, crop)
-
 
 
     def drawMoodlets(self, pet):

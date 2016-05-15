@@ -28,3 +28,27 @@ moodlets['pet']['description'] = ""
 moodlets['pet']['stackable'] = 30
 moodlets['pet']['value'] = 5
 moodlets['pet']['duration'] = 30
+
+moodlets['hungry']['name'] = "Hungry"
+moodlets['hungry']['description'] = "Your pet is hungry, you should feed it"
+moodlets['hungry']['stackable'] = False
+moodlets['hungry']['value'] = -10
+moodlets['hungry']['duration'] = -1
+
+moodlets['starve']['name'] = "Starving"
+moodlets['starve']['description'] = "Your pet is starving, you should feed it"
+moodlets['starve']['stackable'] = False
+moodlets['starve']['value'] = -30
+moodlets['starve']['duration'] = -1
+
+moodlets['clean']['name'] = "Clean"
+moodlets['clean']['description'] = "Your pet is clean and feels good"
+moodlets['clean']['stackable'] = False
+moodlets['clean']['value'] = 15
+moodlets['clean']['duration'] = -1
+
+moodlets['sad']['name'] = "Sad"
+moodlets['sad']['description'] = "Your pet feels sad for no good reason, it'll pass"
+moodlets['sad']['stackable'] = False
+moodlets['sad']['value'] = -10
+moodlets['sad']['duration'] = 90
