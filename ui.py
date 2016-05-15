@@ -5,6 +5,8 @@ import pygame
 import uisettings as uis
 import strings as s
 
+from uifunctions import imgLoader
+
 
 class UI(object):
     """UI Class, handles all UI related stuff"""
@@ -18,26 +20,23 @@ class UI(object):
         """Load images into memory"""
 
         # Load the background
-        self.background = pygame.image.load(uis.backgroundDayImgPath).convert()
-        self.gaugeEmptyImg = pygame.image.load(uis.gaugeEmptyImgPath).convert_alpha()
-        self.gaugeFullImg = pygame.image.load(uis.gaugeFullImgPath).convert_alpha()
+        self.background = imgLoader(uis.backgroundDayImgPath)
+        self.gaugeEmptyImg = imgLoader(uis.gaugeEmptyImgPath)
+        self.gaugeFullImg = imgLoader(uis.gaugeFullImgPath)
 
         # Load Pet images
-        self.aliveImg = pygame.image.load(uis.aliveImgPath).convert_alpha()
-        self.deadImg = pygame.image.load(uis.deadImgPath).convert_alpha()
+        self.aliveImg = imgLoader(uis.aliveImgPath)
+        self.deadImg = imgLoader(uis.deadImgPath)
 
         # Load UI elements
-        self.feedBtnImg = pygame.image.load(uis.feedBtnPath).convert_alpha()
-        self.healBtnImg = pygame.image.load(uis.healBtnPath).convert_alpha()
-        self.idCardImg = pygame.image.load(uis.idCardPath).convert_alpha()
+        self.feedBtnImg = imgLoader(uis.feedBtnPath)
+        self.healBtnImg = imgLoader(uis.healBtnPath)
+        self.idCardImg = imgLoader(uis.idCardPath)
 
         # Load Moodlets images
         self.moodletImg = {}
-        self.moodletImg["fed"] = pygame.image.load(uis.fedImgPath)
-        self.moodletImg["fed"] = self.moodletImg["fed"].convert_alpha()
-
-        self.moodletImg["dirty"] = pygame.image.load(uis.fedImgPath)
-        self.moodletImg["dirty"] = self.moodletImg["fed"].convert_alpha()
+        self.moodletImg["fed"] = imgLoader(uis.fedImgPath)
+        self.moodletImg["dirty"] = imgLoader(uis.fedImgPath)
 
     def createMainWindow(self):
         # create game window
@@ -94,7 +93,6 @@ class UI(object):
         self.window.blit(self.gaugeEmptyImg, uis.gaugeEmptyPos)
         crop = (0, 0, pet.getCurrentMood() * 2, 50)
         self.window.blit(self.gaugeFullImg, uis.gaugeFullPos, crop)
-
 
     def drawMoodlets(self, pet):
         i = 0
