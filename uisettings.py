@@ -32,6 +32,11 @@ healBtnSize = (64, 64)
 healBtnPos = (334, 550)
 healBtnPath = "assets/img/healBtn.png"
 
+# Clean Button
+cleanBtnSize = (64, 64)
+cleanBtnPos = (413, 550)
+cleanBtnPath = "assets/img/cleanBtn.png"
+
 # Pet Images
 aliveImgPath = "assets/img/live-pet.png"
 deadImgPath = "assets/img/dead-pet.png"

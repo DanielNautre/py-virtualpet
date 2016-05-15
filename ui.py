@@ -21,8 +21,6 @@ class UI(object):
 
         # Load the background
         self.background = imgLoader(uis.backgroundDayImgPath)
-        self.gaugeEmptyImg = imgLoader(uis.gaugeEmptyImgPath)
-        self.gaugeFullImg = imgLoader(uis.gaugeFullImgPath)
 
         # Load Pet images
         self.aliveImg = imgLoader(uis.aliveImgPath)
@@ -31,7 +29,10 @@ class UI(object):
         # Load UI elements
         self.feedBtnImg = imgLoader(uis.feedBtnPath)
         self.healBtnImg = imgLoader(uis.healBtnPath)
+        self.cleanBtnImg = imgLoader(uis.cleanBtnPath)
         self.idCardImg = imgLoader(uis.idCardPath)
+        self.gaugeEmptyImg = imgLoader(uis.gaugeEmptyImgPath)
+        self.gaugeFullImg = imgLoader(uis.gaugeFullImgPath)
 
         # Load Moodlets images
         self.moodletImg = {}
@@ -67,12 +68,18 @@ class UI(object):
                     pet.heal()
                     continue
 
+                # Clean ?
+                if self.cleanBtn.collidepoint(mousePos):
+                    pet.clean()
+                    continue
+
     def drawBackground(self):
         self.window.blit(self.background, (0, 0))
 
     def drawUserInterface(self, pet):
         self.feedBtn = self.window.blit(self.feedBtnImg, uis.feedBtnPos)
-        self.healBtn = self.window.blit(self.healBtnImg, uis.healBtnPos)       
+        self.healBtn = self.window.blit(self.healBtnImg, uis.healBtnPos)
+        self.cleanBtn = self.window.blit(self.cleanBtnImg, uis.cleanBtnPos)
 
         self.drawIdCard(pet)
         self.drawHappinessGauge(pet)
