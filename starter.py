@@ -13,6 +13,7 @@ class starter(Tkinter.Tk):
 
     def run(self):
         self.nameField = Tkinter.Entry()
+        self.nameField.focus_set()
         self.nameField.pack()
         createBtn = Tkinter.Button(self, text="Create", command=self.createPet)
         createBtn.pack()
