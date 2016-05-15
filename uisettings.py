@@ -17,8 +17,8 @@ gaugeFullImgPath = "assets/img/gauge-full.png"
 
 # ID Card
 
-idCardPos = (15, 485)
-idCardSize = (150, 100)
+idCardPos = (15, 435)
+idCardSize = (225, 150)
 idCardPath = "assets/img/id-card.png"
 
 
