@@ -42,7 +42,8 @@ class Pet(object):
 
     def clean(self):
         self.dirt = 0
-        del self.activeMood["dirty"]
+        if "dirty" in self.activeMood:
+            del self.activeMood["dirty"]
 
     def moodletDecrease(self):
         markedfordeletion = []
