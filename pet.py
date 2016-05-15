@@ -20,13 +20,17 @@ class Pet(object):
         """ set values when the pet is born"""
 
         self.age = 0  # age in gametick
-        self.hunger = 0  # how hungry is the pet
-        self.health = 5  # how healthy is the pet
+        self.hunger = 100  # how hungry is the pet
+        self.health = 100  # how healthy is the pet
         self.love = 0  # how much does your pet love you
         self.blader = 0  # does you'r pet have a pressing need ?
         self.dirt = 0  # how dirty your pet is
         self.alive = True
         self.activeMood = defaultdict(list)
+        self.name = ""
+
+    def setName(self, value):
+        self.name = value
 
     def feed(self):
         self.hunger = min(self.hunger + 50, Pet.MAXHUNGER)

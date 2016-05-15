@@ -3,6 +3,7 @@
 
 import pet
 import ui
+import starter
 
 
 class virtualPet(object):
@@ -43,7 +44,16 @@ class virtualPet(object):
 
 if __name__ == "__main__":
 
+    # create a window to choose the pet's name
+    starter = starter.starter(None)
+    starter.title('Virtual Pet: start')
+    starter.mainloop()
+
+    # once the loop finishes (the starter window is closed),
+    # launch the actual game
+
     game = virtualPet(None)
+    game.pet.setName(starter.name)
 
     while game.window.isAlive:
 

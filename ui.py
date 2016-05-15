@@ -58,13 +58,11 @@ class UI(object):
                 mousePos = pygame.mouse.get_pos()
 
                 # Feed ?
-
                 if self.feedBtn.collidepoint(mousePos):
                     pet.feed()
                     continue
 
                 # Heal ?
-
                 if self.healBtn.collidepoint(mousePos):
                     pet.heal()
                     continue
@@ -74,10 +72,18 @@ class UI(object):
 
     def drawUserInterface(self, pet):
         self.feedBtn = self.window.blit(self.feedBtnImg, uis.feedBtnPos)
-        self.healBtn = self.window.blit(self.healBtnImg, uis.healBtnPos)
-        
-        self.window.blit(self.idCardImg, uis.idCardPos)
+        self.healBtn = self.window.blit(self.healBtnImg, uis.healBtnPos)       
 
+        self.drawIdCard(pet)
+        self.drawHappinessGauge(pet)
+
+    def drawIdCard(self, pet):
+        self.window.blit(self.idCardImg, uis.idCardPos)
+        font = pygame.font.Font(None, 18)
+        self.nameLbl = font.render(pet.name, 1, (0, 0, 0))
+        self.window.blit(self.nameLbl, (130, 465))
+
+    def drawHappinessGauge(self, pet):
         self.window.blit(self.gaugeEmptyImg, uis.gaugeEmptyPos)
         crop = (0, 0, pet.getCurrentMood() * 2, 50)
         self.window.blit(self.gaugeFullImg, uis.gaugeFullPos, crop)
@@ -92,9 +98,9 @@ class UI(object):
 
     def drawPet(self, pet):
         if pet.alive is True:
-            self.window.blit(self.aliveImg, (200, 300))
+            self.window.blit(self.aliveImg, (250, 300))
         else:
-            self.window.blit(self.deadImg, (200, 300))
+            self.window.blit(self.deadImg, (250, 300))
 
     def redraw(self, pet):
         self.drawBackground()
