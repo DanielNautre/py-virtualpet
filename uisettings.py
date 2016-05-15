@@ -23,13 +23,13 @@ idCardPath = "assets/img/id-card.png"
 
 
 # Feed Button
-feedBtnSize = (50, 50)
-feedBtnPos = (750, 550)
+feedBtnSize = (64, 64)
+feedBtnPos = (255, 550)
 feedBtnPath = "assets/img/feedBtn.png"
 
 # Heal Button
-healBtnSize = (50, 50)
-healBtnPos = (700, 550)
+healBtnSize = (64, 64)
+healBtnPos = (334, 550)
 healBtnPath = "assets/img/healBtn.png"
 
 # Pet Images
