@@ -54,31 +54,18 @@ class UI(object):
             if event.type == pygame.QUIT:
                 self.isAlive = False
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                x, y = event.pos[0], event.pos[1]
 
-                # print "X = %d & Y= %d" % (x, y)
+                mousePos = pygame.mouse.get_pos()
 
                 # Feed ?
-                btnStartX = uis.feedBtnPos[0]
-                btnStopX = uis.feedBtnPos[0] + uis.feedBtnSize[0]
 
-                btnStartY = uis.feedBtnPos[1]
-                btnStopY = uis.feedBtnPos[1] + uis.feedBtnSize[1]
-
-                if (btnStartX < x < btnStopX and
-                        btnStartY < y < btnStopY):
+                if self.feedBtn.collidepoint(mousePos):
                     pet.feed()
                     continue
 
                 # Heal ?
-                btnStartX = uis.healBtnPos[0]
-                btnStopX = uis.healBtnPos[0] + uis.healBtnSize[0]
 
-                btnStartY = uis.healBtnPos[1]
-                btnStopY = uis.healBtnPos[1] + uis.healBtnSize[1]
-
-                if (btnStartX < x < btnStopX and
-                        btnStartY < y < btnStopY):
+                if self.healBtn.collidepoint(mousePos):
                     pet.heal()
                     continue
 
@@ -86,8 +73,9 @@ class UI(object):
         self.window.blit(self.background, (0, 0))
 
     def drawUserInterface(self, pet):
-        self.window.blit(self.feedBtnImg, uis.feedBtnPos)
-        self.window.blit(self.healBtnImg, uis.healBtnPos)
+        self.feedBtn = self.window.blit(self.feedBtnImg, uis.feedBtnPos)
+        self.healBtn = self.window.blit(self.healBtnImg, uis.healBtnPos)
+        
         self.window.blit(self.idCardImg, uis.idCardPos)
 
         self.window.blit(self.gaugeEmptyImg, uis.gaugeEmptyPos)
