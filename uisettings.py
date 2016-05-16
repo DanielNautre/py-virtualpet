@@ -2,6 +2,7 @@
 # -*- coding: utf8 -*
 
 WINSIZE = (800, 600)
+WHITE = (255, 255, 255)
 
 # background
 backgroundDayImgPath = "assets/img/background-day.png"
@@ -45,3 +46,4 @@ deadImgPath = "assets/img/dead-pet.png"
 moodletSize = (32, 32)
 moodletSpacer = (15, 15)
 fedImgPath = "assets/moodlets/fed.png"
+dirtyImgPath = "assets/moodlets/dirty.png"

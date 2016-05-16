@@ -4,6 +4,7 @@
 import pygame
 import uisettings as uis
 import strings as s
+import moodlets as m
 
 from uifunctions import imgLoader
 
@@ -36,8 +37,9 @@ class UI(object):
 
         # Load Moodlets images
         self.moodletImg = {}
+        self.moodletIco = {}
         self.moodletImg["fed"] = imgLoader(uis.fedImgPath)
-        self.moodletImg["dirty"] = imgLoader(uis.fedImgPath)
+        self.moodletImg["dirty"] = imgLoader(uis.dirtyImgPath)
 
     def createMainWindow(self):
         # create game window
@@ -73,6 +75,14 @@ class UI(object):
                     pet.clean()
                     continue
 
+    def handleToolTips(self, pet):
+        mousePos = pygame.mouse.get_pos()
+
+        # check if mouse hover a moodlet icon
+        for mood in self.moodletIco:
+            if self.moodletIco[mood].collidepoint(mousePos):
+                self.drawTooltip(mood, mousePos, pet)
+
     def drawBackground(self):
         self.window.blit(self.background, (0, 0))
 
@@ -86,7 +96,7 @@ class UI(object):
 
     def drawIdCard(self, pet):
         self.window.blit(self.idCardImg, uis.idCardPos)
-        font = pygame.font.Font(None, 18)
+        font = pygame.font.Font(None, 22)
         self.nameLbl = font.render(pet.name, 1, (0, 0, 0))
         self.window.blit(self.nameLbl, (130, 465))
 
@@ -100,7 +110,7 @@ class UI(object):
         for mood in pet.activeMood.iteritems():
             posX = uis.WINSIZE[0] - (uis.moodletSpacer[0] + uis.moodletSize[0])
             posY = uis.moodletSpacer[1] + (i * (uis.moodletSpacer[0] + uis.moodletSize[0]))
-            self.window.blit(self.moodletImg[mood[0]], (posX, posY))
+            self.moodletIco[mood[0]] = self.window.blit(self.moodletImg[mood[0]], (posX, posY))
             i = i + 1
 
     def drawPet(self, pet):
@@ -114,8 +124,24 @@ class UI(object):
         self.drawPet(pet)
         self.drawUserInterface(pet)
         self.drawMoodlets(pet)
+        # handle tooltips
+        self.handleToolTips(pet)
 
         pygame.display.flip()
 
     def setTickSpeed(self, value):
         pygame.time.Clock().tick(value)
+
+    def drawTooltip(self, type, pos, pet):
+        startX = pos[0] - 150
+        startY = pos[1]
+        pygame.draw.rect(self.window, uis.WHITE, (startX, startY, 150, 100), 0)
+
+        titleFont = pygame.font.Font(None, 18)
+        titleLbl = titleFont.render(m.moodlets[type]["name"], 1, (0, 0, 0))
+        self.window.blit(titleLbl, (startX+10, startY+10))
+
+        descFont = pygame.font.Font(None, 14)
+        descLbl = descFont.render(m.moodlets[type]["desc"], 1, (0, 0, 0))
+        self.window.blit(descLbl, (startX+10, startY+20))
+
