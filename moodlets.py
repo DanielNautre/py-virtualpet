@@ -18,25 +18,25 @@ moodlets['fed']['value'] = 15
 moodlets['fed']['duration'] = 60
 
 moodlets['dirty']['name'] = "Dirty"
-moodlets['dirty']['desc'] = "Your pet is dirty, you should clean it"
+moodlets['dirty']['desc'] = "Your pet is dirty,\n you should clean it"
 moodlets['dirty']['stackable'] = False
 moodlets['dirty']['value'] = -15
 moodlets['dirty']['duration'] = -1
 
-moodlets['pet']['name'] = "pet"
-moodlets['pet']['desc'] = ""
+moodlets['pet']['name'] = "Pet"
+moodlets['pet']['desc'] = "Your pet likes the affection"
 moodlets['pet']['stackable'] = 30
 moodlets['pet']['value'] = 5
 moodlets['pet']['duration'] = 30
 
 moodlets['hungry']['name'] = "Hungry"
-moodlets['hungry']['desc'] = "Your pet is hungry, you should feed it"
+moodlets['hungry']['desc'] = "Your pet is hungry,\n you should feed it"
 moodlets['hungry']['stackable'] = False
 moodlets['hungry']['value'] = -10
 moodlets['hungry']['duration'] = -1
 
 moodlets['starve']['name'] = "Starving"
-moodlets['starve']['desc'] = "Your pet is starving, you should feed it"
+moodlets['starve']['desc'] = "Your pet is starving,\n you should feed it"
 moodlets['starve']['stackable'] = False
 moodlets['starve']['value'] = -30
 moodlets['starve']['duration'] = -1
@@ -48,7 +48,7 @@ moodlets['clean']['value'] = 15
 moodlets['clean']['duration'] = -1
 
 moodlets['sad']['name'] = "Sad"
-moodlets['sad']['desc'] = "Your pet feels sad for no good reason, it'll pass"
+moodlets['sad']['desc'] = "Your pet feels sad\n for no good reason,\ it'll pass"
 moodlets['sad']['stackable'] = False
 moodlets['sad']['value'] = -10
 moodlets['sad']['duration'] = 90

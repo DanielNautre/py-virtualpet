@@ -2,7 +2,9 @@
 # -*- coding: utf8 -*
 
 WINSIZE = (800, 600)
-WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+GRAY = (50, 50, 50)
+WHITE = (240, 240, 240)
 
 # background
 backgroundDayImgPath = "assets/img/background-day.png"

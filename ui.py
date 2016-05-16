@@ -133,15 +133,16 @@ class UI(object):
         pygame.time.Clock().tick(value)
 
     def drawTooltip(self, type, pos, pet):
-        startX = pos[0] - 150
+        startX = pos[0] - 200
         startY = pos[1]
-        pygame.draw.rect(self.window, uis.WHITE, (startX, startY, 150, 100), 0)
+
+        pygame.draw.rect(self.window, uis.BLACK, (startX, startY, 200, 120), 0)
+        pygame.draw.rect(self.window, uis.GRAY, (startX+5, startY+5, 190, 110), 1)
 
         titleFont = pygame.font.Font(None, 18)
-        titleLbl = titleFont.render(m.moodlets[type]["name"], 1, (0, 0, 0))
+        titleLbl = titleFont.render(m.moodlets[type]["name"], 1, uis.WHITE)
         self.window.blit(titleLbl, (startX+10, startY+10))
 
         descFont = pygame.font.Font(None, 14)
-        descLbl = descFont.render(m.moodlets[type]["desc"], 1, (0, 0, 0))
+        descLbl = descFont.render(m.moodlets[type]["desc"], 1, uis.WHITE)
         self.window.blit(descLbl, (startX+10, startY+20))
-
