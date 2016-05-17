@@ -2,9 +2,11 @@
 # -*- coding: utf8 -*
 
 WINSIZE = (800, 600)
-BLACK = (0, 0, 0)
-GRAY = (50, 50, 50)
-WHITE = (240, 240, 240)
+
+#Colors used for fonts and widgets
+TTBCK = (30, 30, 30)
+TTOUTLINE = (100, 100, 100)
+TTTEXT = (240, 240, 240)
 
 # background
 backgroundDayImgPath = "assets/img/background-day.png"

@@ -2,7 +2,7 @@
 # -*- coding: utf8 -*
 
 import pygame
-import uisettings as uis
+import uisettings as us
 import strings as s
 import moodlets as m
 
@@ -21,30 +21,30 @@ class UI(object):
         """Load images into memory"""
 
         # Load the background
-        self.background = imgLoader(uis.backgroundDayImgPath)
+        self.background = imgLoader(us.backgroundDayImgPath)
 
         # Load Pet images
-        self.aliveImg = imgLoader(uis.aliveImgPath)
-        self.deadImg = imgLoader(uis.deadImgPath)
+        self.aliveImg = imgLoader(us.aliveImgPath)
+        self.deadImg = imgLoader(us.deadImgPath)
 
         # Load UI elements
-        self.feedBtnImg = imgLoader(uis.feedBtnPath)
-        self.healBtnImg = imgLoader(uis.healBtnPath)
-        self.cleanBtnImg = imgLoader(uis.cleanBtnPath)
-        self.idCardImg = imgLoader(uis.idCardPath)
-        self.gaugeEmptyImg = imgLoader(uis.gaugeEmptyImgPath)
-        self.gaugeFullImg = imgLoader(uis.gaugeFullImgPath)
+        self.feedBtnImg = imgLoader(us.feedBtnPath)
+        self.healBtnImg = imgLoader(us.healBtnPath)
+        self.cleanBtnImg = imgLoader(us.cleanBtnPath)
+        self.idCardImg = imgLoader(us.idCardPath)
+        self.gaugeEmptyImg = imgLoader(us.gaugeEmptyImgPath)
+        self.gaugeFullImg = imgLoader(us.gaugeFullImgPath)
 
         # Load Moodlets images
         self.moodletImg = {}
         self.moodletIco = {}
-        self.moodletImg["fed"] = imgLoader(uis.fedImgPath)
-        self.moodletImg["dirty"] = imgLoader(uis.dirtyImgPath)
+        self.moodletImg["fed"] = imgLoader(us.fedImgPath)
+        self.moodletImg["dirty"] = imgLoader(us.dirtyImgPath)
 
     def createMainWindow(self):
         # create game window
         pygame.display.set_caption(s.windowLbl)
-        self.window = pygame.display.set_mode(uis.WINSIZE)
+        self.window = pygame.display.set_mode(us.WINSIZE)
 
         # load images into memory
         self.loadImages()
@@ -76,40 +76,55 @@ class UI(object):
                     continue
 
     def handleToolTips(self, pet):
+        """displays tooltip depending on mouse position"""
         mousePos = pygame.mouse.get_pos()
 
         # check if mouse hover a moodlet icon
         for mood in self.moodletIco:
             if self.moodletIco[mood].collidepoint(mousePos):
-                self.drawTooltip(mood, mousePos, pet)
+                title = m.moodlets[mood]["name"]
+                text = m.moodlets[mood]["desc"].split("\n")
+                print text
+                self.drawTooltip(mousePos, title, text)
+
+        if self.feedBtn.collidepoint(mousePos):
+            self.drawTooltip(mousePos, "Feed your pet")
+
+        if self.healBtn.collidepoint(mousePos):
+            self.drawTooltip(mousePos, "Heal your hurt pet")
+
+        if self.cleanBtn.collidepoint(mousePos):
+            self.drawTooltip(mousePos, "clean the your pet")
+
 
     def drawBackground(self):
         self.window.blit(self.background, (0, 0))
 
     def drawUserInterface(self, pet):
-        self.feedBtn = self.window.blit(self.feedBtnImg, uis.feedBtnPos)
-        self.healBtn = self.window.blit(self.healBtnImg, uis.healBtnPos)
-        self.cleanBtn = self.window.blit(self.cleanBtnImg, uis.cleanBtnPos)
+        """draws all the UI elements"""
+        self.feedBtn = self.window.blit(self.feedBtnImg, us.feedBtnPos)
+        self.healBtn = self.window.blit(self.healBtnImg, us.healBtnPos)
+        self.cleanBtn = self.window.blit(self.cleanBtnImg, us.cleanBtnPos)
 
         self.drawIdCard(pet)
         self.drawHappinessGauge(pet)
 
     def drawIdCard(self, pet):
-        self.window.blit(self.idCardImg, uis.idCardPos)
+        self.window.blit(self.idCardImg, us.idCardPos)
         font = pygame.font.Font(None, 22)
         self.nameLbl = font.render(pet.name, 1, (0, 0, 0))
         self.window.blit(self.nameLbl, (130, 465))
 
     def drawHappinessGauge(self, pet):
-        self.window.blit(self.gaugeEmptyImg, uis.gaugeEmptyPos)
+        self.window.blit(self.gaugeEmptyImg, us.gaugeEmptyPos)
         crop = (0, 0, pet.getCurrentMood() * 2, 50)
-        self.window.blit(self.gaugeFullImg, uis.gaugeFullPos, crop)
+        self.window.blit(self.gaugeFullImg, us.gaugeFullPos, crop)
 
     def drawMoodlets(self, pet):
         i = 0
         for mood in pet.activeMood.iteritems():
-            posX = uis.WINSIZE[0] - (uis.moodletSpacer[0] + uis.moodletSize[0])
-            posY = uis.moodletSpacer[1] + (i * (uis.moodletSpacer[0] + uis.moodletSize[0]))
+            posX = us.WINSIZE[0] - (us.moodletSpacer[0] + us.moodletSize[0])
+            posY = us.moodletSpacer[1] + (i * (us.moodletSpacer[0] + us.moodletSize[0]))
             self.moodletIco[mood[0]] = self.window.blit(self.moodletImg[mood[0]], (posX, posY))
             i = i + 1
 
@@ -132,17 +147,44 @@ class UI(object):
     def setTickSpeed(self, value):
         pygame.time.Clock().tick(value)
 
-    def drawTooltip(self, type, pos, pet):
-        startX = pos[0] - 200
+    def drawTooltip(self, pos, title, text=""):
+        # calculate size of the TT
+        # Height = title height + number lines * line height + margins
+        # Width = margins + fixed size
+        
+        margins = 15
+        titleFontSize = 18
+        textFontSize = 14
+
+        width = (margins * 2) + 170
+        height = (margins * 3) + titleFontSize + (textFontSize * len(text))
+        
+        # Calculate starting position for the TT
+        startX = pos[0]
         startY = pos[1]
 
-        pygame.draw.rect(self.window, uis.BLACK, (startX, startY, 200, 120), 0)
-        pygame.draw.rect(self.window, uis.GRAY, (startX+5, startY+5, 190, 110), 1)
+        if width + pos[0] > us.WINSIZE[0]:
+            startX = pos[0] - width
+        if height + pos[1] > us.WINSIZE[1]:
+            startY = pos[1] - height
 
-        titleFont = pygame.font.Font(None, 18)
-        titleLbl = titleFont.render(m.moodlets[type]["name"], 1, uis.WHITE)
-        self.window.blit(titleLbl, (startX+10, startY+10))
+        rect = (startX, startY, width, height)
+        outline = (startX + 5, startY + 5, width - 10, height - 10)
 
-        descFont = pygame.font.Font(None, 14)
-        descLbl = descFont.render(m.moodlets[type]["desc"], 1, uis.WHITE)
-        self.window.blit(descLbl, (startX+10, startY+20))
+        # draw the TT
+        
+        pygame.draw.rect(self.window, us.TTBCK, rect, 0)
+        pygame.draw.rect(self.window, us.TTOUTLINE, outline, 1)
+        
+        titleFont = pygame.font.Font(None, titleFontSize)
+        textFont = pygame.font.Font(None, textFontSize)
+
+        titleLbl = titleFont.render(title, 1, us.TTTEXT)
+        self.window.blit(titleLbl, (startX + margins, startY + margins))
+
+        i = 0
+        for line in text:
+            posY = startY + titleFontSize + (2 * margins) + (i * textFontSize)
+            textLbl = textFont.render(line, 1, us.TTTEXT)
+            self.window.blit(textLbl, (startX + margins, posY))
+            i = i + 1
