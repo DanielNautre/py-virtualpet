@@ -96,10 +96,6 @@ class UI(object):
         if self.cleanBtn.collidepoint(mousePos):
             self.drawTooltip(mousePos, "clean the your pet")
 
-
-    def drawBackground(self):
-        self.window.blit(self.background, (0, 0))
-
     def drawUserInterface(self, pet):
         """draws all the UI elements"""
         self.feedBtn = self.window.blit(self.feedBtnImg, us.feedBtnPos)
@@ -116,6 +112,7 @@ class UI(object):
         self.window.blit(self.nameLbl, (130, 465))
 
     def drawHappinessGauge(self, pet):
+        """Draw top gauge to indicate hapiness level"""
         self.window.blit(self.gaugeEmptyImg, us.gaugeEmptyPos)
         crop = (0, 0, pet.getCurrentMood() * 2, 50)
         self.window.blit(self.gaugeFullImg, us.gaugeFullPos, crop)
@@ -135,10 +132,13 @@ class UI(object):
             self.window.blit(self.deadImg, (250, 300))
 
     def redraw(self, pet):
-        self.drawBackground()
+        """Handle drawing of the game window"""
+        self.window.blit(self.background, (0, 0))
+
         self.drawPet(pet)
         self.drawUserInterface(pet)
         self.drawMoodlets(pet)
+
         # handle tooltips
         self.handleToolTips(pet)
 
@@ -149,16 +149,13 @@ class UI(object):
 
     def drawTooltip(self, pos, title, text=""):
         # calculate size of the TT
-        # Height = title height + number lines * line height + margins
-        # Width = margins + fixed size
-        
         margins = 15
         titleFontSize = 18
         textFontSize = 14
 
         width = (margins * 2) + 170
         height = (margins * 3) + titleFontSize + (textFontSize * len(text))
-        
+
         # Calculate starting position for the TT
         startX = pos[0]
         startY = pos[1]
@@ -172,10 +169,9 @@ class UI(object):
         outline = (startX + 5, startY + 5, width - 10, height - 10)
 
         # draw the TT
-        
         pygame.draw.rect(self.window, us.TTBCK, rect, 0)
         pygame.draw.rect(self.window, us.TTOUTLINE, outline, 1)
-        
+
         titleFont = pygame.font.Font(None, titleFontSize)
         textFont = pygame.font.Font(None, textFontSize)
 
